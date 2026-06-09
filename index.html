@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Diya Taib — Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0c0c0c;
+  --paper:#f5f0e8;
+  --red:#e63946;
+  --red2:#ff8fa3;
+  --gold:#f4a261;
+  --muted:#7a7065;
+  --bebas:'Bebas Neue',sans-serif;
+  --serif:'Instrument Serif',serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--mono);overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s,opacity 0.2s;mix-blend-mode:multiply}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transition:transform 0.15s,opacity 0.2s;transform:translate(-50%,-50%);mix-blend-mode:multiply}
+
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9000;opacity:0.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;mix-blend-mode:multiply}
+.nav-name{font-family:var(--bebas);font-size:1.4rem;letter-spacing:0.1em;color:var(--ink)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:7rem 3rem 3rem;position:relative;overflow:hidden}
+.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--bebas);font-size:28vw;color:transparent;-webkit-text-stroke:1px rgba(230,57,70,0.07);white-space:nowrap;pointer-events:none;user-select:none;letter-spacing:-0.02em}
+
+.hero-main{display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;opacity:0;animation:rise 0.7s 0.1s ease forwards}
+
+.hero-name{font-family:var(--bebas);font-size:clamp(5rem,12vw,11rem);line-height:0.88;letter-spacing:-0.01em;opacity:0;animation:rise 0.7s 0.2s ease forwards}
+.hero-name .stroke{-webkit-text-stroke:2px var(--ink);color:transparent}
+.hero-name .fill{color:var(--red)}
+.hero-name .muted{color:var(--muted)}
+
+.hero-tagline{font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,2.5vw,2rem);color:var(--muted);margin-top:1.5rem;max-width:600px;line-height:1.4;opacity:0;animation:rise 0.7s 0.35s ease forwards}
+
+.hero-actions{display:flex;gap:1rem;margin-top:2.5rem;opacity:0;animation:rise 0.7s 0.5s ease forwards}
+.btn{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.8rem 2rem;text-decoration:none;border:1.5px solid;transition:all 0.25s;display:inline-block}
+.btn-filled{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn-filled:hover{background:var(--red);border-color:var(--red)}
+.btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;opacity:0;animation:rise 0.7s 0.6s ease forwards}
+.hero-location{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.hero-scroll{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:0.6rem}
+.scroll-line{width:40px;height:1px;background:var(--muted)}
+
+/* MARQUEE STRIP */
+.marquee-wrap{background:var(--red);overflow:hidden;padding:0.7rem 0;margin:0}
+.marquee-inner{display:flex;gap:0;animation:marquee 18s linear infinite;white-space:nowrap}
+.marquee-inner span{font-family:var(--bebas);font-size:1.1rem;letter-spacing:0.15em;color:var(--paper);padding:0 2rem}
+.marquee-inner span.dot{color:rgba(255,255,255,0.4)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.section-header{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:3.5rem}
+.section-num{font-size:0.65rem;letter-spacing:0.2em;color:var(--muted)}
+.section-title{font-family:var(--bebas);font-size:clamp(3rem,6vw,5rem);letter-spacing:0.02em;line-height:1}
+
+/* ABOUT STRIP */
+.about-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--ink)}
+.about-cell{padding:3rem;border-right:1.5px solid var(--ink)}
+.about-cell:last-child{border-right:none}
+.about-label{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem}
+.about-val{font-family:var(--serif);font-size:1.3rem;line-height:1.5}
+.about-val em{color:var(--red);font-style:italic}
+
+/* PROJECTS */
+.projects-list{display:flex;flex-direction:column;border:1.5px solid var(--ink)}
+.proj{display:grid;grid-template-columns:60px 1fr auto;align-items:start;gap:2rem;padding:2.5rem;border-bottom:1.5px solid var(--ink);text-decoration:none;color:inherit;transition:background 0.2s;position:relative;overflow:hidden}
+.proj:last-child{border-bottom:none}
+.proj::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--red);transition:width 0.3s ease}
+.proj:hover::before{width:4px}
+.proj:hover{background:rgba(230,57,70,0.03)}
+.proj-num{font-family:var(--bebas);font-size:2rem;color:rgba(0,0,0,0.12);line-height:1}
+.proj-body{display:flex;flex-direction:column;gap:0.6rem}
+.proj-name{font-family:var(--bebas);font-size:2.2rem;letter-spacing:0.03em;line-height:1;transition:color 0.2s}
+.proj:hover .proj-name{color:var(--red)}
+.proj-desc{font-size:0.75rem;color:var(--muted);line-height:1.7;max-width:520px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.3rem}
+.proj-tag{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border:1px solid rgba(0,0,0,0.15);color:var(--muted)}
+.proj-arrow{font-family:var(--bebas);font-size:1.5rem;color:rgba(0,0,0,0.15);transition:all 0.2s;align-self:center}
+.proj:hover .proj-arrow{color:var(--red);transform:translateX(4px)}
+
+/* OSS */
+.oss-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--ink)}
+.oss-card{background:var(--paper);padding:2.5rem;position:relative;overflow:hidden}
+.oss-card::after{content:'';position:absolute;bottom:0;right:0;width:80px;height:80px;background:radial-gradient(circle at bottom right,rgba(230,57,70,0.1),transparent 70%)}
+.oss-repo{font-family:var(--bebas);font-size:2rem;letter-spacing:0.03em;margin-bottom:0.5rem}
+.oss-stars{font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:1rem}
+.oss-desc{font-size:0.75rem;color:var(--muted);line-height:1.7}
+.oss-pr{display:inline-block;margin-top:1rem;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);border-bottom:1px solid var(--red);padding-bottom:2px}
+
+/* STACK */
+.stack-cloud{display:flex;flex-wrap:wrap;gap:0.8rem}
+.stack-item{font-family:var(--bebas);font-size:1.4rem;letter-spacing:0.05em;padding:0.4rem 1.2rem;border:1.5px solid transparent;transition:all 0.2s;color:var(--ink)}
+.stack-item:hover{border-color:var(--red);color:var(--red)}
+.stack-item.core{border-color:var(--ink)}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink);margin:4rem 0}
+.stat{padding:2rem;border-right:1.5px solid var(--ink);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--bebas);font-size:3.5rem;color:var(--red);line-height:1}
+.stat-l{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:0.3rem}
+
+/* CONTACT */
+.contact-section{background:var(--ink);color:var(--paper);padding:8rem 3rem;text-align:center;position:relative;overflow:hidden}
+.contact-section::before{content:'HIRE';position:absolute;font-family:var(--bebas);font-size:30vw;color:rgba(255,255,255,0.03);top:50%;left:50%;transform:translate(-50%,-50%);letter-spacing:-0.02em;pointer-events:none}
+.contact-title{font-family:var(--bebas);font-size:clamp(4rem,10vw,8rem);line-height:0.9;margin-bottom:2rem;position:relative}
+.contact-title .accent{color:var(--red)}
+.contact-sub{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:rgba(255,255,255,0.5);margin-bottom:3rem;position:relative}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-light{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.btn-light:hover{background:var(--red);border-color:var(--red);color:var(--paper)}
+.btn-ghost-light{background:transparent;border-color:rgba(255,255,255,0.3);color:var(--paper)}
+.btn-ghost-light:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.08);font-size:0.65rem;letter-spacing:0.1em}
+
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:700px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1.2rem}
+  .hero{padding:6rem 1.5rem 2rem}
+  .section{padding:4rem 1.5rem}
+  .about-strip{grid-template-columns:1fr}
+  .about-cell{border-right:none;border-bottom:1.5px solid var(--ink)}
+  .oss-grid{grid-template-columns:1fr}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .proj{grid-template-columns:40px 1fr}
+  .proj-arrow{display:none}
+  .contact-section{padding:5rem 1.5rem}
+  footer{flex-direction:column;gap:0.3rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<nav>
+  <span class="nav-name">D·T·I</span>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#oss">OSS</a>
+    <a href="#stack">Stack</a>
+    <a href="#contact">Hire</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">BUILD</div>
+  <div class="hero-main">
+    <p class="hero-eyebrow">Full-Stack Engineer · Kurdistan, Iraq · Open to Remote</p>
+    <h1 class="hero-name">
+      <span class="stroke">DIYA </span><span class="fill">TAIB</span><br>
+      <span class="muted">ISMAHIL</span>
+    </h1>
+    <p class="hero-tagline">I build AI-native platforms, developer tools,<br>and systems that <em style="color:var(--red)">actually work.</em></p>
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-filled">See My Work</a>
+      <a href="https://github.com/DIYA73" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="#contact" class="btn btn-ghost">Hire Me</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <span class="hero-location">📍 Sulaymaniyah · Available Worldwide</span>
+    <span class="hero-scroll"><span class="scroll-line"></span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>TypeScript</span><span class="dot">✦</span>
+    <span>NestJS</span><span class="dot">✦</span>
+    <span>Next.js</span><span class="dot">✦</span>
+    <span>React</span><span class="dot">✦</span>
+    <span>PostgreSQL</span><span class="dot">✦</span>
+    <span>Redis</span><span class="dot">✦</span>
+    <span>Docker</span><span class="dot">✦</span>
+    <span>BullMQ</span><span class="dot">✦</span>
+    <span>WebSockets</span><span class="dot">✦</span>
+    <span>OpenAI</span><span class="dot">✦</span>
+    <span>Prisma</span><span class="dot">✦</span>
+    <!-- duplicate for loop -->
+    <span>TypeScript</span><span class="dot">✦</span>
+    <span>NestJS</span><span class="dot">✦</span>
+    <span>Next.js</span><span class="dot">✦</span>
+    <span>React</span><span class="dot">✦</span>
+    <span>PostgreSQL</span><span class="dot">✦</span>
+    <span>Redis</span><span class="dot">✦</span>
+    <span>Docker</span><span class="dot">✦</span>
+    <span>BullMQ</span><span class="dot">✦</span>
+    <span>WebSockets</span><span class="dot">✦</span>
+    <span>OpenAI</span><span class="dot">✦</span>
+    <span>Prisma</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section" style="padding-bottom:0">
+  <div class="about-strip">
+    <div class="about-cell">
+      <div class="about-label">Who I am</div>
+      <div class="about-val">Engineer from Kurdistan. I build systems that ship, scale, and <em>actually solve real problems.</em></div>
+    </div>
+    <div class="about-cell">
+      <div class="about-label">What I do</div>
+      <div class="about-val">AI platforms, developer tools, real-time systems. <em>Full-stack TypeScript.</em> Production quality.</div>
+    </div>
+  </div>
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n">11+</div><div class="stat-l">Projects Built</div></div>
+    <div class="stat"><div class="stat-n">2</div><div class="stat-l">OSS Contributions</div></div>
+    <div class="stat"><div class="stat-n">70k+</div><div class="stat-l">Stars Contributed To</div></div>
+    <div class="stat"><div class="stat-n">4+</div><div class="stat-l">Years Coding</div></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="section" id="work">
+  <div class="section-header">
+    <span class="section-num">001</span>
+    <h2 class="section-title">Selected Work</h2>
+  </div>
+  <div class="projects-list">
+
+    <a class="proj" href="https://github.com/DIYA73/agentflow" target="_blank">
+      <span class="proj-num">01</span>
+      <div class="proj-body">
+        <div class="proj-name">agentflow</div>
+        <div class="proj-desc">Visual AI Agent Builder & Orchestration Platform. Drag-and-drop canvas to build, chain, and deploy autonomous AI agents with cron/webhook triggers, JWT auth, and real-time WebSocket streaming.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">NestJS</span><span class="proj-tag">Next.js</span><span class="proj-tag">React Flow</span><span class="proj-tag">WebSockets</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">OpenAI</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+    <a class="proj" href="https://github.com/DIYA73/webhookforge" target="_blank">
+      <span class="proj-num">02</span>
+      <div class="proj-body">
+        <div class="proj-name">webhookforge</div>
+        <div class="proj-desc">Full-stack webhook delivery platform. Real-time monitoring, BullMQ retry queues, delivery logs, and a live WebSocket dashboard. TypeScript monorepo from scratch.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">NestJS</span><span class="proj-tag">BullMQ</span><span class="proj-tag">Redis</span><span class="proj-tag">Next.js</span><span class="proj-tag">WebSockets</span><span class="proj-tag">Docker</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+    <a class="proj" href="https://github.com/DIYA73/mockmate-api" target="_blank">
+      <span class="proj-num">03</span>
+      <div class="proj-body">
+        <div class="proj-name">MockMate</div>
+        <div class="proj-desc">AI voice interview coach with a live speech pipeline. Deepgram STT + ElevenLabs TTS + OpenAI LLM integrated via Python pipecat. NestJS backend + Next.js frontend.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">NestJS</span><span class="proj-tag">Next.js</span><span class="proj-tag">Python</span><span class="proj-tag">Deepgram</span><span class="proj-tag">ElevenLabs</span><span class="proj-tag">OpenAI</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+    <a class="proj" href="https://github.com/DIYA73/flux-ops" target="_blank">
+      <span class="proj-num">04</span>
+      <div class="proj-body">
+        <div class="proj-name">flux-ops</div>
+        <div class="proj-desc">AI-powered microservices observability platform. Anomaly detection, real-time WebSocket monitoring, intelligent alerting across distributed systems.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">NestJS</span><span class="proj-tag">Next.js</span><span class="proj-tag">WebSockets</span><span class="proj-tag">AI/ML</span><span class="proj-tag">PostgreSQL</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+    <a class="proj" href="https://github.com/DIYA73/ClinicCore" target="_blank">
+      <span class="proj-num">05</span>
+      <div class="proj-body">
+        <div class="proj-name">ClinicCore</div>
+        <div class="proj-desc">Hospital records management system — a full desktop app with modern Avalonia UI, built with C# and .NET 10, backed by SQL Server in Docker.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">C#</span><span class="proj-tag">.NET 10</span><span class="proj-tag">Avalonia UI</span><span class="proj-tag">SQL Server</span><span class="proj-tag">Docker</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- OSS -->
+<section class="section" id="oss">
+  <div class="section-header">
+    <span class="section-num">002</span>
+    <h2 class="section-title">Open Source</h2>
+  </div>
+  <div class="oss-grid">
+    <div class="oss-card">
+      <div class="oss-repo">InsForge</div>
+      <div class="oss-stars">★ 11,400 stars</div>
+      <div class="oss-desc">Merged PR #1296 — Implemented persistent column reordering in TypeScript/React. Became Contributor #16 on one of the top open-source agent platforms.</div>
+      <span class="oss-pr">Merged · PR #1296</span>
+    </div>
+    <div class="oss-card">
+      <div class="oss-repo">ruflo</div>
+      <div class="oss-stars">★ 58,200 stars</div>
+      <div class="oss-desc">PR #2135 — Documentation fix + deep bug investigation on issue #2127. Investigation was cited by the project maintainer in the public thread.</div>
+      <span class="oss-pr">Cited by Maintainer · PR #2135</span>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="section" id="stack">
+  <div class="section-header">
+    <span class="section-num">003</span>
+    <h2 class="section-title">Tech Stack</h2>
+  </div>
+  <div class="stack-cloud">
+    <span class="stack-item core">TypeScript</span>
+    <span class="stack-item core">NestJS</span>
+    <span class="stack-item core">Next.js</span>
+    <span class="stack-item core">React</span>
+    <span class="stack-item core">PostgreSQL</span>
+    <span class="stack-item core">Redis</span>
+    <span class="stack-item core">Docker</span>
+    <span class="stack-item core">BullMQ</span>
+    <span class="stack-item core">Prisma</span>
+    <span class="stack-item core">WebSockets</span>
+    <span class="stack-item">Node.js</span>
+    <span class="stack-item">React Flow</span>
+    <span class="stack-item">OpenAI API</span>
+    <span class="stack-item">Deepgram</span>
+    <span class="stack-item">ElevenLabs</span>
+    <span class="stack-item">JWT</span>
+    <span class="stack-item">C# / .NET</span>
+    <span class="stack-item">PHP / Laravel</span>
+    <span class="stack-item">Python</span>
+    <span class="stack-item">GitHub Actions</span>
+    <span class="stack-item">SQL Server</span>
+    <span class="stack-item">MongoDB</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <h2 class="contact-title">Let's build<br><span class="accent">together.</span></h2>
+  <p class="contact-sub">Available for remote work · Full-time or contract</p>
+  <div class="contact-links">
+    <a href="mailto:diyaismahil7@gmail.com" class="btn btn-light">diyaismahil7@gmail.com</a>
+    <a href="https://github.com/DIYA73" target="_blank" class="btn btn-ghost-light">GitHub ↗</a>
+    <a href="https://linkedin.com/in/didi-86b00329a" target="_blank" class="btn btn-ghost-light">LinkedIn ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Diya Taib Ismahil</span>
+  <span>github.com/DIYA73</span>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=(mx-6)+'px'; cur.style.top=(my-6)+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=(rx-20)+'px'; ring.style.top=(ry-20)+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,.btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';ring.style.transform='translate(-50%,-50%) scale(1.5)'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)'});
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
+},{threshold:0.1});
+document.querySelectorAll('.proj,.oss-card,.stat,.about-cell').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity 0.6s ease, transform 0.6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
