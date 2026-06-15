@@ -202,6 +202,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
     <span>BullMQ</span><span class="dot">✦</span>
     <span>WebSockets</span><span class="dot">✦</span>
     <span>OpenAI</span><span class="dot">✦</span>
+    <span>MCP</span><span class="dot">✦</span>
     <span>Prisma</span><span class="dot">✦</span>
     <!-- duplicate for loop -->
     <span>TypeScript</span><span class="dot">✦</span>
@@ -232,8 +233,8 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
   </div>
   <!-- STATS -->
   <div class="stats-bar">
-    <div class="stat"><div class="stat-n">11+</div><div class="stat-l">Projects Built</div></div>
-    <div class="stat"><div class="stat-n">2</div><div class="stat-l">OSS Contributions</div></div>
+    <div class="stat"><div class="stat-n">13+</div><div class="stat-l">Projects Built</div></div>
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">OSS Contributions</div></div>
     <div class="stat"><div class="stat-n">70k+</div><div class="stat-l">Stars Contributed To</div></div>
     <div class="stat"><div class="stat-n">4+</div><div class="stat-l">Years Coding</div></div>
   </div>
@@ -259,8 +260,34 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
       <span class="proj-arrow">→</span>
     </a>
 
-    <a class="proj" href="https://github.com/DIYA73/webhookforge" target="_blank">
+    <a class="proj" href="https://github.com/DIYA73/mcp-hub" target="_blank">
       <span class="proj-num">02</span>
+      <div class="proj-body">
+        <div class="proj-name">mcp-hub</div>
+        <div class="proj-desc">Self-hosted MCP server registry and proxy. Register any MCP server once, proxy all tool calls through one endpoint with auth forwarding, and stream real-time logs via WebSocket. TypeScript-native alternative to the Go MCP registry.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">NestJS</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">Redis</span><span class="proj-tag">BullMQ</span><span class="proj-tag">WebSockets</span><span class="proj-tag">MCP</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+    <a class="proj" href="https://github.com/DIYA73/nestjs-skills" target="_blank">
+      <span class="proj-num">03</span>
+      <div class="proj-body">
+        <div class="proj-name">nestjs-skills</div>
+        <div class="proj-desc">8 Claude Code skills for NestJS backend development. Drop into ~/.claude/skills/ and Claude Code auto-discovers them. Covers module scaffolding, TypeORM, BullMQ, WebSocket gateways, JWT auth, Redis caching, Docker, and testing.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Claude Code</span><span class="proj-tag">NestJS</span><span class="proj-tag">TypeScript</span><span class="proj-tag">AI Tools</span>
+        </div>
+      </div>
+      <span class="proj-arrow">→</span>
+    </a>
+
+    <a class="proj" href="https://github.com/DIYA73/webhookforge" target="_blank">
+      <span class="proj-num">04</span>
+    <a class="proj" href="https://github.com/DIYA73/webhookforge" target="_blank">
+      <span class="proj-num">04</span>
       <div class="proj-body">
         <div class="proj-name">webhookforge</div>
         <div class="proj-desc">Full-stack webhook delivery platform. Real-time monitoring, BullMQ retry queues, delivery logs, and a live WebSocket dashboard. TypeScript monorepo from scratch.</div>
@@ -272,7 +299,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
     </a>
 
     <a class="proj" href="https://github.com/DIYA73/mockmate-api" target="_blank">
-      <span class="proj-num">03</span>
+      <span class="proj-num">05</span>
       <div class="proj-body">
         <div class="proj-name">MockMate</div>
         <div class="proj-desc">AI voice interview coach with a live speech pipeline. Deepgram STT + ElevenLabs TTS + OpenAI LLM integrated via Python pipecat. NestJS backend + Next.js frontend.</div>
@@ -284,7 +311,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
     </a>
 
     <a class="proj" href="https://github.com/DIYA73/flux-ops" target="_blank">
-      <span class="proj-num">04</span>
+      <span class="proj-num">06</span>
       <div class="proj-body">
         <div class="proj-name">flux-ops</div>
         <div class="proj-desc">AI-powered microservices observability platform. Anomaly detection, real-time WebSocket monitoring, intelligent alerting across distributed systems.</div>
@@ -296,7 +323,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
     </a>
 
     <a class="proj" href="https://github.com/DIYA73/ClinicCore" target="_blank">
-      <span class="proj-num">05</span>
+      <span class="proj-num">07</span>
       <div class="proj-body">
         <div class="proj-name">ClinicCore</div>
         <div class="proj-desc">Hospital records management system — a full desktop app with modern Avalonia UI, built with C# and .NET 10, backed by SQL Server in Docker.</div>
@@ -328,6 +355,18 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
       <div class="oss-stars">★ 58,200 stars</div>
       <div class="oss-desc">PR #2135 — Documentation fix + deep bug investigation on issue #2127. Investigation was cited by the project maintainer in the public thread.</div>
       <span class="oss-pr">Cited by Maintainer · PR #2135</span>
+    </div>
+    <div class="oss-card">
+      <div class="oss-repo">presenton</div>
+      <div class="oss-stars">Open Source</div>
+      <div class="oss-desc">PR #649 — Data retention service in Python asyncio for the open-source AI presentation generator. Marked ready for review.</div>
+      <span class="oss-pr">Ready for Review · PR #649</span>
+    </div>
+    <div class="oss-card">
+      <div class="oss-repo">cc-skills</div>
+      <div class="oss-stars">Claude Code</div>
+      <div class="oss-desc">PR #31 — TypeScript strict-mode skill contributed to the official Claude Code skills collection.</div>
+      <span class="oss-pr">Contributed · PR #31</span>
     </div>
   </div>
 </section>
@@ -372,6 +411,7 @@ footer{background:var(--ink);color:rgba(255,255,255,0.3);padding:1.5rem 3rem;dis
     <a href="mailto:diyaismahil7@gmail.com" class="btn btn-light">diyaismahil7@gmail.com</a>
     <a href="https://github.com/DIYA73" target="_blank" class="btn btn-ghost-light">GitHub ↗</a>
     <a href="https://linkedin.com/in/didi-86b00329a" target="_blank" class="btn btn-ghost-light">LinkedIn ↗</a>
+    <a href="https://x.com/Diya_555696" target="_blank" class="btn btn-ghost-light">X ↗</a>
   </div>
 </section>
 
